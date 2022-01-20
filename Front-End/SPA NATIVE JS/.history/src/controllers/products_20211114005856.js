@@ -1,0 +1,1 @@
+import view from '../controllers/products.html'

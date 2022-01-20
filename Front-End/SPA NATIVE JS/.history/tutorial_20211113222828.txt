@@ -1,0 +1,59 @@
+Para empezar nuestra proyecto js, lo primero que hacemos
+es guardar index.html main.js y main.css en uan carpeta llamada src
+luego para manejar el css y el javascript instalaremos webpack
+con la instruccion npm install webpack -D / npm install webpack-cli -D
+Para configurar webpack, tenes que crear un objecto en un archivo en la raiz
+llamado webpack.config.js
+
+Example code
+
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+module.exports = {
+    mode: 'development',
+    entry: './src/main.js',
+    output: {
+        path: __dirname + '/dist',
+        filename: 'bundle.js',
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: './src/index.html',
+        })
+    ],
+    module: {
+        rules: [{
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader']
+        }]
+    }
+}
+
+En mode indicamos en que ambiente estamos trabajando
+En entry, tenemos que poner el path a nuestro archivo principal de javascript
+En output, indicamos el path donde queremos que se guarde el archivo bundle.js
+La carpeta dist se crea corriendo el comando npm webpack, y esa carpeta es para el codigo de produccion
+Para agregar nuestro HTML a la carpeta DIST tenemos que instalar otra extension
+npm install html-webpack-plugin -D y configurar indicandole el template que queremos utilizar
+Luego para poder llamar css dentro de nuestro javascript tenemos que agregar otra extension llamada
+style-loader y css-loader, y configurar el apartado module.rules
+
+Todo esto nos permite hacer un import 'main.css' en nuestro javascript, y webpack automaticamente lo va a
+incluir en nuestro HTML al igual que el codigo de javascript
+
+Por eso no nocesitamos agregar tags <script></script> ni <link>, webpack se encarga de todo eso
+
+Para hacer un enrutamiento en nuestro proyecto podemos hacerlo align-items
+
+<nav class="navbar">
+    <ul>
+        <li></<a href="#/">Home</a><li>
+        <li><a href="#/products">Products</a></li>
+    </ul>
+</nav>
+
+con "#/pagename"
+
+Y podemos capturar el evento de cambio de url para cambiar nuestras paginas
+El nombre de ese evento es hashchange. Y podemos obtener el hash con window.location.hash
+De esa manera capturamos en que pestaña estamos y podemos crear una serie de if para ver que pintamos dependiendo del hash que venga

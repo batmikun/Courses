@@ -1,0 +1,36 @@
+1 - No tener mas de un nivel de identacion funciones o metodos
+2 - Cuando hagas un if no hagas un else
+3 - Escalability, encapsular primitivos, arrays y colleciones
+4 - Ley de Demeter, no hacer referencia a los objetos
+5 - No abreviar nombres de variables
+6 - Clases no mas de dos dependicias en el constructor
+7 - No getters ni setters, respetar Tell Don't Ask.
+8 - Plantearse hacer abstracciones cuando el codigo se repita mas de 3 veces
+9 - I - Inversion de dependencias
+10 - REST : Crear nuevo recurso, USAR PUT
+11 - Recomendadas - Victor Mono, Danke SH, Comic Sans Mono
+12 - Aprender . Statico, Dinamico, OOP, Funcional
+13 - SOLID -> Single Responsibility, Open Closed, Liskov Substitution, Interface Segregation, Dependency Inversion
+14 - Clean Architecture
+15 - UML sirve para modelar el codigo
+16 - Empezar por un monolito y luego ir hacia otra arquitectura cuando se necesite escalabilidad
+17 - Extreme Programming Book
+18 - Organizar codigo por modulos y no por conceptos
+
+    MODULOS                       X CONCEPTOS
+ 
+    customer                       application
+        application                     customer
+        domain                          invoice
+        infrastructure                  order
+    invoice                        domain
+        application                     customer
+        domain                          invoice
+        infrastructure                  order
+    order                           infrastructure
+        application                     customer
+        domain                          invoice
+        infrastructure                  order 
+
+19 - Cuando trabajos con tipos, siempre poner return type en las funciones publicas
+20 - Evitar JOIN en querys

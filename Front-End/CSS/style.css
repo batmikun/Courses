@@ -1,0 +1,558 @@
+/*
+    CSS Stands for Cascading Style Sheets.
+
+    The CSS is used to style the HTML.
+    
+    Specificity: 
+    
+        Css handles the importance of the styles bottom from top
+        and left to right. Meaning that if there is a tag for body {} and another
+        tag for body {} then the second one will override the first one.
+
+        If a tag of css has the attribute of !important then it rules over another styles
+
+        The importance between tag, class and id is in this order:
+            1. !important
+            2. Id
+            3. Class
+            4. Tag
+
+        Also:
+            1. Inline styles
+            2. <style> tag
+            3. <link> tag
+
+    CSS Box Model:
+
+        Is essentialy a box that contains the HTML elements.
+        It consists of: margin, border, padding and content.
+
+        Content : The HTML elements that are inside the box.
+        Padding : The space between the Content and The Border. Is transparent
+        Border : Separates Margin and Pading
+        Margin : Clears an area outside the border. Is transparent
+
+        <-- Margin - Border <- Padding [content]  Padding -> Border - Margin -->
+
+    CSS Selectors:
+
+        Selector are ways of grabbing and manipulating HTML
+        There are many different ways to select, however they all turn out the same way
+        Different selector have different applications.
+
+
+        select tag:
+            p {
+                color: red;
+            }
+
+        select class:
+            .class {
+                color: red;
+            }
+        
+        select id:
+            #id {
+                color: red;
+            }
+
+        select tag and class:
+            p.class {
+                color: red;
+            }
+
+        select tag and id:
+            p#id {
+                color: red;
+            }
+
+        select class and id:
+            .class#id {
+                color: red;
+            }
+
+        select tag, class and id:
+
+            p#id.class {
+                color: red;
+            }  
+            
+        classes are meant to use in several places
+        id is meant to use in one place
+
+        CSS Pseudoselector:
+                
+            :hover -> When the mouse is over the element
+            :active -> When the mouse is pressed down on the element
+            :focus -> When the element is in focus
+            :visited -> When the element has been visited
+            :link -> When the element is a link
+            :before -> When the element is before another element
+            :after -> When the element is after another element
+            :first-child -> When the element is the first child of another element
+            :last-child -> When the element is the last child of another element
+            :first-of-type -> When the element is the first of its type in its parent
+            :last-of-type -> When the element is the last of its type in its parent
+            :only-child -> When the element is the only child of another element
+            :only-of-type -> When the element is the only of its type in its parent
+            :nth-child -> When the element is the nth child of another element
+            :nth-of-type -> When the element is the nth of its type in its parent
+            :nth-last-child -> When the element is the nth last child of another element
+            :nth-last-of-type -> When the element is the nth last of its type in its parent
+            :empty -> When the element has no children
+            :root -> When the element is the root element
+            :target -> When the element is the target of a link
+            :enabled -> When the element is enabled
+            :disabled -> When the element is disabled
+            :checked -> When the element is checked
+            :indeterminate -> When the element is indeterminate
+            :not -> When the element does not match the selector
+            :lang -> When the element has the specified language
+            :contains -> When the element contains the specified text
+            :dir -> When the element has the specified direction
+            :first-letter -> When the element is the first letter of another element
+            :first-line -> When the element is the first line of another element
+            :before -> When the element is before another element
+            :after -> When the element is after another element
+            :selection  
+            :placeholder -> When the element is a placeholder
+            :invalid -> When the element is invalid
+            :required -> When the element is required
+            :optional -> When the element is optional
+            :read-only -> When the element is read only
+
+            li:first-child {
+                This is the first child of the li tag
+                color: red;
+            }
+
+            li:nth-child(2) {
+                nth-child(2) means the all second child of the ul's second child
+                color: blue;
+            }
+
+            a:link { 
+                Before we click in the link
+                color: blue;
+            }
+
+            a:visited {
+                After we click in the link
+                color: red;
+            }
+
+        CSS Advance Selector:
+            
+            + -> The next sibling
+            ~ -> The next siblings
+            > -> The child
+            ~ > -> The next siblings of the child
+            + + -> The next sibling of the next sibling
+
+            Adjecent siblig selector: -> It applies to the next siblings of the component we are putting first on the sentence
+                
+                h2 + a { -> for example this will lookup for all the a tags that are next to the h2 tag
+                    color: red;
+                }
+
+            General sibling selector: -> Same as above but the components have to have the same parent
+
+                textarea ~ input { -> this will apply styles to the input below the textarea, but for this to happen input and textarea have to have the same parent
+                    color: red;
+                    border-radius: 5px;
+                }
+
+            Child selector: -> It applies to the children of the component we are putting first on the sentence
+
+                ul > li { -> this will apply styles to the li tags that are children of the ul tag
+                    color: red;
+                }
+
+            Descendant selector: -> It applies to the children of the component we are putting first on the sentence and all the children of the children of the component we are putting first on the sentence
+
+                ul li a { -> this will apply styles to the a tags that are children of the li tags that are children of the ul tag
+                    color: red;
+                }
+
+
+        CSS Attribute Selector:
+
+
+            We select the element based on HTML attributes
+
+            h2[attribute] { -> this will apply styles to the h2 tags that have the attribute attribute
+                color: red;
+            }
+
+            img[src=fullpath] { -> this will apply styles to the img tags that have the attribute attribute with the value value
+                color: red;
+            }
+
+            img[src^=../img/] { -> same above, but the value does not have the entire url, so we can select multiple images
+                color: red;
+            }
+
+            img[src*=.jpg] { -> contains the string .jpg
+                color: red;
+            }
+
+            a[href~=red] { -> Has to contain the string red between whitespaces
+                color: red;
+            }
+
+            a[href|=.com] { -> Has to start with .com
+                color: red;
+            }
+
+            a[href$=.com] { -> Has to end with .com
+                color: red;
+            }            
+
+            img[src$=.jpg] { -> same above, but the value does not have the entire url, so we can select multiple images
+                color: red;
+            }
+
+            p[attribute!=value] { -> this will apply styles to the p tags that have the attribute attribute with the value different from value
+                color: red;
+            }
+
+
+        CSS Properties
+
+            They are the thing that we use to style the elements
+            for example color, background, border, font, etc
+            
+            
+        padding : top, right, bottom, left
+            Starts at twelve and it moves with the neddles of the clock
+
+        float : left, right, none -> It is used to float the elements to the left or right
+            Moves everything outside of the flow, to his own sections
+            If we have thing below the element that we float, this will come up
+            to the same line of the element that we float
+            We can use clear:boath with the elements that we want to keep
+            outside of the things that we want to float
+            So they doesn't get affected bc of the float
+
+        display : block, inline, none, flex, grid, inline-block, inline-flex, inline-grid, inline-table, table-caption, table-cell, table-column, table-column-group, table-footer-group, table-header-group, table-row, table-row-group, table-cell-group, table-column-group, table-header-group, table-row-group, table-row-group, table-caption-group, table-cell-group, table-column-group, table-header-group, table-row-group, table-row-group, table-caption-group, table-cell-group, table-column-group, table-header-group, table-row-group, table-row-group, table-caption-group, table-cell-group, table-column-group, table-header-group, table-row-group, table-row-group, table-caption-group, table-cell-group, table-column-group, table-header-group, table-row-group, table-row-group, table-caption-group, table-cell-group, table-column-group, table-header-group, table-row-group, table-row-group, table-caption-group, table-cell-group, table-column-group, table-header-group, table-row-group, table-row-group, table-caption-group, table-cell-group, table-column-group, table-header-group, table-row-group, table-row-group, table-caption-group, table-cell-group, table-column-group, table-header-group, table-row-group, table-row-group, table-caption-group, table-cell-group, table-column-group, table-header-group, table-row-group, table-row-group, table-caption-group, table-cell-group, table-column-group, table-header-group, table-row-group, table-row-group, table-caption-group, table-cell-group, table-column-group, table-header-group, table-row-group, table-row-group, table-ca
+
+        CSS Flex:
+
+            We can create rows or columns, we can use flex-direction, flex-wrap, flex-flow, flex-grow, flex-shrink, flex-basis, align-content, align-items, justify-content, justify-items, align-self, justify-self, order
+            FlexBox stands for Flexible Box
+            It is a display type that comes with a range of properties allowing you to arrenge items easily
+            It is an alternative to using displays, floats, and other layout properties.
+
+            A Flexbox element is split into two main parts: the container, and the items
+
+            The container is the parent elemental in wich the display type is active.
+            This is usually in the form of a div
+
+            Flex items oare child elements of the container, and make up the contents of the box.
+
+            Create a flex container -> display: flex;
+
+            with flex-direction we can select if we want a row or a column
+            or row-reverse or column-reverse
+            
+            flex-wrap: with this property we can make the elements not overflow the parent container
+            it is very usefull to avoid the deformity or some elements because are to many items in a 
+            row
+
+            justify-content: we can acomodar the content in a horizontal axis
+
+            align-items: we can acomodar the contents in a vertical axis
+
+            we can change the order of the elements in the flex container
+            with the property order
+
+            style="order: 2;" -> this will put the element in the second position
+
+            This thre properties below we can use it to manage the extra space from the 
+            flex container
+
+            flex-shrink: minimun width of the flex container
+
+            flex-grow: we can increase the size of the element
+
+            flex-basis: we can set the size of the element
+
+            The flex property is the mix of shrink, grow, and basis
+
+            flex: grow shrink basis;
+
+            aling-self: center flex-start flex-end
+                we can use this property to aling an element in the flex container
+                this property will override the align-items property
+
+        CSS FLEX VS GRID:
+            They achieve the same, but the grid
+            has more options and is more complex
+            very focused on providing tools for both dimensions
+            width and height, whereas Flexbos is focused on the
+            width alone
+
+        CSS Grid:
+            to active the container we use the display: grid;
+            setting display:grid allow us to create a grid and
+            use all the features of the gridb
+
+            Two basci properties
+                grid-template-rows: 
+                grid-template-columns:
+            
+            we can especify how much rows and columns we want
+            we start the grid with certain columns or rows and
+            especify the size of the columns or rows
+
+            we set up the number through the sizes we specify
+
+            grid-template-columns: 20px 60px 70px; -> 3 values = 3 columns
+
+            we can use it the both at the same time
+
+            to aling and justify
+
+            justify-content: center;
+
+            aling-content: center;
+
+            We can specify yhe gap between the columns or rows
+
+            grid-columns-gap: 10px;
+            grid-rows-gap: 10px;
+
+            shorthand
+                grid-gap: row column;
+
+            resize and manipulate items in the grid
+
+            start and end a item at a designated area
+
+                grid-column: start / end; -> starts at line 1 and end in line 3
+                grid-row: start / end; -> starts a line 1 and end in line 3
+
+                we can use algo 1 / span 2 this is more easy to use than 1 / 3
+
+            the shorthand for the above is
+
+                grid-area: rowstart / columnstart / rowend / columnend;
+
+            CSS TRANSITION PROPERTY:
+                
+                    transition: property duration timing-function delay;
+
+                        property: all, background, border, color, font, margin, padding, transform, width, height, opacity, all
+    
+                        duration: time in seconds
+    
+                        timing-function: linear, ease, ease-in, ease-out, ease-in-out, cubic-bezier(x1, y1, x2, y2)
+    
+                        delay: time in seconds
+
+                    this works with like event like hover, etc
+
+                    we difine in the class the transition property
+
+                    and we define the property that we will be affected by the
+                    event
+
+                    .submit-button {
+                        margin: 20px 30px;
+                        padding: 10px;
+                        border: none;
+                        text-decoration: none;
+                        font-size: 20px;
+                        color: white;
+                        background-color: black;
+                        transition: background-color 0.3s ease 1s;
+                    }
+
+                    .submit-button:hover {
+                        background-color: white;
+                        color: black;
+                    }
+
+                    prefix for multiple browser support
+
+  chrome/safari        -webkit-transition: property duration timing-function delay;
+  firefox              -moz-transition: property duration timing-function delay;
+  opera                -o-transition: property duration timing-function delay;
+
+
+                CSS TRANSFORMATION PROPERTY:
+                        
+                        transform: translate(x, y) scale(x, y) rotate(x) skew(x, y)
+                        
+                        translate: move the element in the x and y axis
+                        scale: scale the element in the x and y axis
+                        rotate: rotate the element in the x axis
+                        skew: skew the element in the x and y axis
+
+                        we can use the shorthand
+
+                        transform: translate(x, y) scale(x, y) rotate(x) skew(x, y)
+
+                        this transform property goes in wherever we want.
+
+                        if we want to affect a element from the beggining we put it
+                        in the styte
+                        if we want to affect when we hover we put it inside the hover pseudo class
+                        and call transition in the parent to make the transform go with the rest of 
+                        the properties
+
+                CSS ANIMATIONS:
+                        
+                        we define a animation with @key frames
+
+                        @keyframes name {
+                            0% {
+                                transform: translate(0, 0);
+                            }
+                            100% {
+                                transform: translate(100px, 0);
+                            }
+                        }
+
+                        and then we call it in the class, tag or id
+                        in this way
+
+                        animation-name: name;
+
+                        for the animation to run we have to add the
+                        animation-duration
+
+                        animation-duration: time in seconds
+
+                        DELAY
+                        animation-delay: time in seconds
+                            it can be negative. Negative menas that
+                            when the page loads the animation will be
+                            start in the delay time
+
+                        animation-delay: -2
+                            the animation don't start from the beggining
+                            starts in the state that the animation will be
+                            if it were passed 2seg
+
+                        SPEED/STYLES
+                        animation-timing-function: linear, ease, ease-in, ease-out, ease-in-out, cubic-bezier(x1, y1, x2, y2)
+
+                        ITERATIONS
+                        animation-iteration-count: infinite, n
+
+                        shorthand
+
+                        animation: name duration timing-function delay iteration-count direction fill-mode;
+
+
+*/
+
+body {
+	background-color: green;
+	padding: 20px;
+}
+
+.container {
+	background-color: rgb(250, 250, 250);
+	margin: 10px;
+	height: 300px;
+
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.container-item {
+	flex: 1 1 100px;
+	background-color: green;
+	color: white;
+	font-size: 25px;
+	text-align: center;
+	width: 70px;
+	line-height: 50px;
+	margin: 10px;
+}
+
+.grid-container {
+	background-color: rgb(250, 250, 250);
+	margin: 10px;
+	height: 300px;
+
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+}
+.grid-container-item {
+	background-color: green;
+	color: white;
+	font-size: 25px;
+	text-align: center;
+	width: 70px;
+	line-height: 50px;
+	margin: 10px;
+}
+
+.submit-button {
+	margin: 20px 30px;
+	padding: 10px;
+	border: none;
+	text-decoration: none;
+	font-size: 20px;
+	color: white;
+	background-color: black;
+	transition: background-color, color, transform 1s ease-in-out;
+}
+
+.submit-button:hover {
+	background-color: white;
+	color: black;
+	transform: translate(10px, 10px) scale(1.1) rotate(360deg);
+}
+
+button .span {
+	display: block;
+	background-color: black;
+	width: 50px;
+	height: 10px;
+	margin: 5px;
+}
+
+button .span:nth-child(2):hover {
+	background-color: red;
+	transform: translate(5px, 0);
+}
+
+button .span:nth-child(3):active {
+	transform: translate(0, -15px) rotate(-45deg);
+}
+
+button .span:nth-child(1):active {
+	transform: translate(0, 15px) rotate(45deg);
+}
+
+.subtitle {
+	animation-name: subtitle;
+	animation-duration: 2s;
+	animation-timing-function: ease;
+	animation-iteration-count: infinite;
+}
+
+@keyframes subtitle {
+	0% {
+		background: red;
+		transform: translate(0, 0);
+	}
+
+	50% {
+		background: green;
+		transform: translate(50px, 0);
+	}
+
+	100% {
+		background: blue;
+		transform: translate(100px, 0);
+	}
+}

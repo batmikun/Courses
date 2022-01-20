@@ -1,0 +1,110 @@
+$path = '/dir1/myfile.php';
+$file = 'file.txt';
+
+//LIST FILES AND DIRECTORIES
+scandir(__DIR__);
+
+//FILE NAME AND EXTENSION
+
+basename($path)  // myfile.php
+
+basename($path, '.php'); // myfile
+
+// DIRECTORY NAME
+
+dirname($path); // dir1
+
+// CHECK IF A FILE EXIST, THIS WORKS FOR FOLDERS TOO
+
+file_exists($file); //Boolean
+
+// GET ABSOLUTE PATH OF THE FILE
+
+realpath($file); // C:/ ........
+
+// CHECKS TO SEE IF IS A FILE
+
+is_file($file); // Boolean
+
+// CHECK IF A FILE IS WRITABLE
+
+is_writable($file); // Boolean
+
+// CHECK IF A FILE IS READABLE
+
+is_readable($file); //Boolean
+
+// GET FILE SIZE
+
+filesize($file); // Returns in bytes
+
+// MANIPULATE FILESYSTEM
+
+// Create a Folder
+
+mkdir('path', permisos);
+
+// Create Dir Recursively;
+
+mkdir('foo/bar', permision, recursion:true)
+
+foo/
+   bar/
+
+// Delete a directory, while it's no file in it
+
+rmdir('path');
+
+//Copy a File
+
+copy('pathoriginalFile', 'pathcopyFile');
+
+//Rename a File
+
+rename('pathOriginalFile', 'newPathFile');
+
+//Delete File
+
+unlink('pathToFile');
+
+// Read FILE in form of a string
+
+file_get_contents('pathToFile');
+
+// Write FILE - This replace the existing text
+
+file_put_contents('pathToFile', data);
+
+// Write FILE - append to the existing content
+
+file_puts_contents('pathTofile', $data, FILE_APPEND);
+
+// Open file for reading
+
+$handle = fopen('pathToFile', 'r'); //If there is no file, it create it
+
+$data = fread($handle, filesize('pathToFile'));
+
+// Open file for writing
+
+$handle = fopen('pathToFile', 'w'); //If there is no file, it create it
+
+$txt = "Hola\n"; // To put the content in other line
+
+fwrite($handle, $txt);
+
+// close the file
+
+fclose($handle);
+
+//Obtain line of a file
+
+foreach fgets('pathToFile') as $line {
+	echo $line
+};
+
+//Read a csv file
+
+foreach fgetsCsv('pathToFile') as $line {
+	echo $line
+}

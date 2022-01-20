@@ -1,0 +1,29 @@
+:root {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	--primary-color: #b0c6d2;
+	--secondary-color: #d0dde9;
+	--tertiary-color: #edf0f8;
+}
+
+body {
+	background: linear-gradient(
+		to bottom,
+		var(--primary-color) 0%,
+		var(--secondary-color) 50%,
+		var(--secondary-color) 100%
+	);
+
+	min-height: 100vh;
+	margin: 0;
+}
+
+h1 {
+	text-align: center;
+	font-size: 2rem;
+}
+
+@media (min-width: 768px) {
+	h1 {
+		font-size: 3rem;
+	}
+}

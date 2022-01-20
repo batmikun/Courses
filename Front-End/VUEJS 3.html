@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Vue 3 Basics</title>
+        <style>
+            [v-cloak] {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <nameOfTheComponent /> <!-- This is the component. We call it, as we were in REACT -->
+
+        <div id="app" v-clock>
+            {{ greeting }}
+            <input v-model="greeting" type="text">
+        </div>
+
+        <button v-on:click="isVisible = true">Show Box</button>
+
+        <div v-if ="isVisible" class="box"><h1>Hello World</h1></div>
+        <!-- Importar vue -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.js"></script>
+        <script>
+            let app = Vue.createApp({
+                data: function() {
+                    return {
+                        greeting: 'Hello World',
+                        isVisible: true
+                    }
+                },
+                methods:{ 
+                    toggleBox(){
+                        this.isVisible = !this.isVisible2
+                    }
+                }
+            })
+            app.component('nameOfTheComponent', {
+                template: `
+                    <div>
+                        <h1>{{ title }}</h1>
+                    </div>
+                    `,
+                data() {
+                    return {
+                        title: 'Title'
+                    }
+                },
+            })
+            app.mount('#app')
+        </script>
+    </body>
+</html>
+
+<script>
+/*
+ *
+ * VUE-JS 3
+ *
+ * VUE is a Virtual-Dom Framework for JavaScript.
+ *
+ * It's very good to replace jquery and js legacy applications. Because you can do it page by page.
+ * Also is very good to build full application.
+ *
+ * VUE is a ecosystem, you can download the main library, or add many libraries for te ecosystem.
+ *
+ * You can install it in your project through a CDN. Like Jquery
+ *
+ * <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.js">
+ *
+ * let app = Vue.createApp({
+ *   data: function() {
+ *       return {
+ *           greeting: 'Hello World'
+ *       }
+ *   }
+ * })
+ * app.mount('#app')
+ * 
+ * Con Vue.createApp({ podemos crear una instancia de Vue.
+ *      data: function() { data es obligatorio, es donde va a vivir nuestra pplicacion, y data tiene que devolver un objeto
+ *          return {
+ *              greeting: 'Hello World'
+ *          }
+ *      }, 
+ *      methods:{ dentro de methods guardamos todos los methodos que queremos ejecutar dentro de nuestros eventos o funciones. Es accesible desde cualquier lugar desde nuestra app.
+ *          toggleBox(){
+ *             this.isVisible = !this.isVisible2
+ *          }
+ *     }
+ *  }) 
+ * 
+ * Para montar esta instancia de Vue en un elemento HTML, podemos usar el método Vue.createApp({}).mount('#app')
+ * Podemos guardar Vue.createApp dentro de una app y ejecutar el comando app.mount('#idDiv')
+ * 
+ * Para usar una variable en Vue podemos usar {{}}, cualquier cosa encontrada dentro de {{}} va a ser parseada por Vuej como
+ * javascript.
+ *
+ * 
+ * Vue se maneja con directivas dentro del tag html
+ * 
+ * Una directiva que podemos atachar a un input es v-model
+ * 
+ * V-MODEL
+ * greeting hace referencia a la variable dentro de data.
+ * <input v-model="greeting" type="text">
+ * 
+ * greeting hace referencia a la variable dentro de data.
+ * 
+ * V-IF (es un if statement)
+ * 
+ * <div v-if ="isVisible" class="box"></div> isVisible hace una referencia que tambien encontrariamos dentro de data
+ * <div v-else-if="isVisible2" class="box"></div>
+ * <div v-else class="box"></div>
+ * 
+ * V-SHOW
+ * 
+ * muy parecida a v-if la diferencia entre v-if, v-show es que v-show cambie el display to none.
+ * 
+ * V-CLOCK
+ * utility that will hide anything from rendering until the full app is ready.
+ * Se agrega en el div principal, o en el lugar que se quiere lograr.
+ * 
+ * y se agrega a CSS
+ * 
+ * [v-clock] {
+ *  display:none;
+ * }
+ * 
+ * V-CLOCK remains in the div until the hole app loaded.
+ * 
+ * Events
+ * 
+ * V-ON
+ * Is only for events, regular JS events & customs events
+ * 
+ * V-ON:CLICK => Shorthand @click
+ * 
+ * <button v-on:click="isVisible = true">Show Box</button>
+ * 
+ * V-ON:KEYPRESS => shorthand @keypress
+ * 
+ * We can add modifiers for events
+ * 
+ * <input @keypress.enter="toggleBox">
+ * <input @keypress.prevent="toggleBox"> Is like preventDefault
+ * 
+ * To pass parameter beetween functions, is like always. 
+ * 
+ * CUSTOM COMPONENTS
+ * 
+ *  app.component('nameOfTheComponent', {
+ *       template: `
+ *            <div>
+ *                <h1>{{ title }}</h1>
+ *            </div>
+ *                   `,
+ *        data() {
+ *            return {
+ *                title: 'Title'
+ *                   }
+ *               },
+ * })
+ * 
+ * a component is another instance of VUEJS, las variables que creemos dentro de esos componentes solamente estan disponibles dentro de 
+ * ese componente.
+ * 
+ * To pass parameters beetween components, we have to register the components in the parent component
+ * inside the parent instance, we have to add components: ['nameOfTheComponent']
+ * 
+ * V-BIND => shorthand :htmltag
+ * 
+ * Se usa para pasar datos de un componente padre a un hijo.
+ * 
+ * <inpunt v-bind:label="greeting">
+ * 
+ * and in the child we recieve inside the instance in the array
+ * props:[greeting]
+ * 
+ * we can accept the props modelValue that is the value of the input in the parent component
+ * 
+ * To pass form the child to the parent
+ * we use the object
+ * 
+ * props:['modelValue'] 
+ * computed: {
+ *    get() {
+ *       return this.modelValue
+ *    }
+ * 
+ *    set(value) {
+ *       this.$emit('update:modelValue', value) emit events that other components can listen to
+ *    }
+ * 
+ * }
+ * 
+ * V-MODEL es un shorthand que ademas de lo que hace normalmente, tambien escucha eventos de los hijos de tipo "update:modelValue"
+ * 
+ * Porque V-MODEL => V-Model:email @modelvalue:email
+ * 
+ * The props that we pass to the child are inmutable, so we need to use the $emit to 
+ * send the new values to the variables of the parent
+ * 
+ * Hay muchas maneras de pasar valores entre componentes. Lo escrito mas arriba es una de la mas straight forward.
+ * Hay soluciones mas optimas y entendibles.
+ * 
+ * 
+ * 
+ * LOOPS
+ * 
+ * we can add to the object data
+ * 
+ * inputs:[{
+ *    'email',
+ *    'password'
+ * }],
+ * 
+ *  V-FOR 
+ *  Es un for in, se accede al elemento dentro del elemento html en el cual esta definido el v-for
+ *  Siempre en un loop hay que agregar una propiedad que se llame key y tiene que ser unica en cada elemento.
+ * for normal arrays we can use the index
+ * for objects we can use the index and the key
+ * <p v-for="str in inputs" :key="str">{{ str }}</p>
+ * <p v-for="(str, index) in inputs" :key="i"></p>
+ * <p v-for="(obj, key, i) in inputs" :key="i"></p>
+ * 
+ * LIFECYCLE HOOKS
+ * 
+ * The lifecycle is the order in which the components are created, updated, destroyed.
+ * That basically means elements that enter or leave the DOM.
+ * 
+ * Hooks => es una funcion que se ejecuta en una instancia de Vue.
+ *          Functions that will be trigger to run in a especific moment of the lifecycle.
+ * 
+ * Diagram
+ * 
+ *                          new Vue()
+ *                 Init (Events & Lifecicly)
+ *  [before create]
+ *                Init (injections & reaction)
+ *  [created]
+ *                      {Has "el" option?}  -------       {No}
+ *                           {Yes}             {when vm.$mount(el) is called}
+ *                    {Has "template" option?}  
+ *                          {Yes}                         {No}
+ *                   {Compile template               {Compile el's
+ *                          into                    outerHTML
+ *                    render function}                as template}
+ * [beforeMount]                                     
+ *                            {Create vm.$el and replace el with it}
+ * [mounted]                     when data changes [beforeUpdate]          
+ *                                         {Mounted}        {Virtual DOM re-render and patch}
+ *                                                  [Updated]
+ *                                        {when vm.$destroy() is called}
+ * [beforeUnmount]
+ *                                        {Teardown watchers
+ *                                          chiled, etc}
+ * [unmounted]
+ * 
+ * The lifecycle hookes are called in the component, no van adentro de ningun objeto
+ * van en el mismo nivel que data, components, templates, etc.
+ * 
+ * create() {
+ *   console.log('create')
+ * }
+ * 
+ * Commons cases
+ * 
+ * authorized checks
+ * API calls
+ * Creating or removing events
+ * Getting or cleaning up data
+ * 
+ * Se puede asnyc tanto en los metodos como en los lifecycle hooks
+ * 
+ * data : {
+ *  users: '',
+ * }
+ * 
+ * asyc method() {
+ *   let fetch = await fetch('https://api.example.com/users')
+ *   let users = await fetch.json()
+ * 
+ *   this.users = users
+ * }
+ * 
+ * SomeTimes if the function that we pass from the parent to the child have the same name VueJS doesn't recognize it as a function.
+ * This is a problem that has the CDN, to solve this problem we have to name the function different in the child
+ * 
+ * REUSABLE COMPONENT
+ * 
+ * Working with the CDN we can extract all the vue code to a separate js file
+ * and then call it from a script <script src="main.js">, that allows to use the components in different HTML pages
+ * But this not solution not share data beetween pages.
+ * Because when a pages refresh the data is gone.
+ * 
+ * One solution would be use the local storage, and the loop trough the local storage to get the data in the different pages.
+ * 
+ * The best solution is to do a single pages application, where the framework is the responsable for the routing. This means
+ * that when we change the pages the pages does not refresh, and that causes the page not refresh
+ * and that means that the variables does not refresh.
+ * /
+ * 
+ * To use VUEJS From NPM
+ * 
+ * We have to install npm @vue/cli
+ * and the when we have vue cli, we can do vue create my-app
+ * 
+</script>

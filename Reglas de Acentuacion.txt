@@ -1,0 +1,14 @@
+Reglas de Acentuacion!
+
+Primero hay que identificar cual es la silaba que lleva el tilde.
+
+Todas las palabras tienen una silaba que lleva mas enfasis que las demas.
+
+Que lleve tilde o no depende de donde caiga ese enfasis.
+
+Esdrújulas : Siempre llevan tilde. Tienen el enfasis en la -3 sílaba. 
+Agudas : Solo cuando terminan en S, N o VOCAL. Tienen el enfasis en la -1 sílaba
+Graves : Solo llevan tilde cuando no terminan en S, N o VOCAL. Tienen el énfasis en la -2 sílabas
+Sobresdrújulas : Siempre llevan tilde. Tienen el enfasis en la -4 sílaba.
+
+Hiatos:

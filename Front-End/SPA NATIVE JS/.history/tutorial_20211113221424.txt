@@ -1,0 +1,8 @@
+Para empezar nuestra proyecto js, lo primero que hacemos
+es guardar index.html main.js y main.css en uan carpeta llamada src
+luego para manejar el css y el javascript instalaremos webpack
+con la instruccion npm install webpack -D / npm install webpack-cli -D
+Para configurar webpack, tenes que crear un objecto en un archivo en la raiz
+llamado webpack.config.js
+
+Example code

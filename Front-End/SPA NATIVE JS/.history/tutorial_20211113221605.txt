@@ -1,0 +1,37 @@
+Para empezar nuestra proyecto js, lo primero que hacemos
+es guardar index.html main.js y main.css en uan carpeta llamada src
+luego para manejar el css y el javascript instalaremos webpack
+con la instruccion npm install webpack -D / npm install webpack-cli -D
+Para configurar webpack, tenes que crear un objecto en un archivo en la raiz
+llamado webpack.config.js
+
+Example code
+
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+module.exports = {
+    mode: 'development',
+    entry: './src/main.js',
+    output: {
+        path: __dirname + '/dist',
+        filename: 'bundle.js',
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: './src/index.html',
+        })
+    ],
+    module: {
+        rules: [{
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader']
+        }]
+    }
+}
+
+En mode indicamos en que ambiente estamos trabajando
+En entry, tenemos que poner el path a nuestro archivo principal de javascript
+En output, indicamos el path donde queremos que se guarde el archivo bundle.js
+La carpeta dist se crea corriendo el comando npm webpack, y esa carpeta es para el codigo de produccion
+Para agregar nuestro HTML a la carpeta DIST tenemos que instalar otra extension
+npm install html-webpack-plugin -D
