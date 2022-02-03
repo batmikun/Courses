@@ -488,7 +488,7 @@ function mySet() {
 
     this.remove = function (element) {
         if (this.has(element)) {
-            index = collection.indexOf(element);
+            let index = collection.indexOf(element);
             collection.splice(index, 1);
             return true;
         }
@@ -547,7 +547,7 @@ function mySet() {
  */
 
 function myQueue() {
-    collection = [];
+    let collection = [];
     this.print = function () {
         console.log(collection);
     };
@@ -734,7 +734,7 @@ console.log(4)
  */
 
 
-url = 'https://jsonplaceholder.typicode.com/posts';
+const url = 'https://jsonplaceholder.typicode.com/posts';
 
 // BEFORE FETCH
 const request = new XMLHttpRequest();
@@ -745,8 +745,8 @@ request.send(); // send()
 
 request.onreadystatechange = () => { // onreadystatechange(function)  - reqyest.addEventListener('readystatechange', function)
     if (request.readyState === 4 && request.status === 200) {
-        const data = JSON.parse(request.responseText);
-        console.log(data);
+        const data2 = JSON.parse(request.responseText);
+        console.log(data2);
     }
 } // FOUR STATES -> 0, 1, 2, 3, 4
 
@@ -775,24 +775,28 @@ const getSomething = () => {
 }
 
 getSomething() // returns a promise
-    .then(data => { })
-    .catch(error => { });
+    .then(data4 => { 
+        console.log(data4);
+    })
+    .catch(error => {
+        console.log(error);
+     });
 
 
 const getTodos = (resource) => {
     return new Promise((resolve, reject) => {
-        const request = new XMLHttpRequest();
+        const request2 = new XMLHttpRequest();
 
-        request.opren('GET', url); // open(method, url)
-        request.setRequestHeader('Content-Type', 'application/json'); // setRequestHeader(name, value)
-        request.send(); // send()
+        request2.opren('GET', url); // open(method, url)
+        request2.setRequestHeader('Content-Type', 'application/json'); // setRequestHeader(name, value)
+        request2.send(); // send()
 
-        request.onreadystatechange = () => { // onreadystatechange(function)  - reqyest.addEventListener('readystatechange', function)
-            if (request.readyState === 4 && request.status === 200) {
-                const data = JSON.parse(request.responseText);
-                resolve(data);
-            } else if (request.readyState === 4 && request.status === 404) {
-                reject(request.statusText);
+        request2.onreadystatechange = () => { // onreadystatechange(function)  - reqyest.addEventListener('readystatechange', function)
+            if (request2.readyState === 4 && request2.status === 200) {
+                const data5 = JSON.parse(request2.responseText);
+                resolve(data5);
+            } else if (request2.readyState === 4 && request2.status === 404) {
+                reject(request2.statusText);
             }
 
         }
@@ -800,16 +804,16 @@ const getTodos = (resource) => {
 }
 
 getTodos('todos/luigi,json')
-    .then(data => {
-        console.log('1 promise resolved', data);
+    .then(data7 => {
+        console.log('1 promise resolved', data7);
         return getTodos('todos/mario,json')
     })
-    .then(data => {
-        console.log('2 promise resolved', data);
+    .then(data7 => {
+        console.log('2 promise resolved', data7);
         return getTodos('todos/yoshi,json')
     })
-    .then(data => {
-        console.log('3 promise resolved', data);
+    .then(data7 => {
+        console.log('3 promise resolved', data7);
     })
     .catch(error => {
         console.log('promise rejected', error);
@@ -819,14 +823,16 @@ getTodos('todos/luigi,json')
 
 // OLD WAY TU USE FETCH, USING PROMISES
 
-fetche(url, {
+/*
+fetch(url, {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json'
     },
 })
+*/
 
-fetch($url)
+fetch(url)
     .then(response => response.json())
     .then(json => console.log(json))
     .catch(error => console.log(error));
@@ -838,7 +844,7 @@ fetch($url)
 
 // WHEN WE CALL AN ASYNC FUNCTION, IT RETURNS A PROMISE
 
-const getTodos = async () => { // This always return a promise
+const getTodos2 = async () => { // This always return a promise
 
     try {
         const response = await fetch(url, { // await - wait for the promise to resolve
@@ -852,9 +858,9 @@ const getTodos = async () => { // This always return a promise
             throw new Error('Not Found');
         }
 
-        const data = await response.json();
+        const data10 = await response.json();
 
-        return data
+        return data10
     } catch (error) {
         console.log(error);
     }
@@ -862,8 +868,206 @@ const getTodos = async () => { // This always return a promise
 
 
 // THIS IS NON-BLOCKING CODE
-getTodos()
-    .then(data => console.log(data))
+getTodos2()
+    .then(data29 => console.log(data29))
     .catch(error => console.log(error));
 
-const data = await getTodos();
+const data6 = await getTodos();
+
+/**
+ * EL CALLSTACK
+ * 
+ *  JavaScript es un lenguaje de programacion monoproceso (Single Threaded Language)
+ * 
+ *  -> Solamente ejecuta una sola cosa a la vez
+ * 
+ *  -> Pila/Stack -> LIFO
+ * 
+ *  -> Tiene un unico CALLSTACK [Pila de llamada]
+ *      Callstack -> Lugar donde se guardan las llamadas a las funciones.
+ *                -> Esto es el porque de que los scripts js se ejecuten de forma secuencial.
+ *                -> El callstack nos ayuda a saber que funcion es la que se esta ejecutando, y que funciones ya sucedieron
+ * 
+ * -> Para poder ver el callstack podemos usar la funcion console.trace()
+ * -> o user debugger; al principio de la funcion y luego buscarla en el
+ * -> source del navegador
+ * 
+ */
+
+/**
+ * LISTAS - FIFO
+ */
+
+class NodeList{
+    constructor(value){
+        this.value = value;
+        this.next = null;
+    }
+}
+
+class List{
+    constructor(){
+        this.head = null;
+        this.last = null;
+    }
+
+    push(value){
+        const node = new NodeList(value);
+
+        if (this.head === null) this.head = node;
+        else this.last.next = node;
+
+        this.last = node;
+    }
+
+    pop(){
+        if (this.head === null) return null;
+
+        const node = this.head;
+        this.head = this.head.next;
+
+        return node.value;
+    }
+
+    print(){
+        let node = this.head;
+
+        while(node !== null){
+            console.log(node.value);
+            node = node.next;
+        }
+    }
+
+    length(){
+        let node = this.head;
+        let length = 0;
+
+        while(node !== null){
+            length++;
+            node = node.next;
+        }
+
+        return length;
+    }
+
+    getLast(){
+        return this.last;
+    }
+
+    getElementAt(index){
+        let aux = this.head;
+        let actualIndex = 0;
+
+        while(actualIndex !== index && aux !== null){
+            aux = aux.next;
+            actualIndex++;
+        }
+
+        return aux
+    }
+
+    delete(node){
+        node.data = node.next.data
+        this.next = this.next.next 
+    }
+
+}
+
+/*
+    STACK - LIFO
+*/
+
+class NodeStack {
+    constructor(value){
+        this.value = value;
+        this.prev = null;
+    }
+}
+
+class Stack{
+    constructor(){
+        this.top = null;
+    }
+
+    push(value){
+        const node = new NodeStack(value);
+
+        if (this.top === null) {
+            this.top = node;
+        } else {
+            node.prev = this.top;
+            this.top = node;
+        }
+    }
+
+    current(){
+        return this.top;
+    }
+
+    pop(){
+        if (this.top === null) return null;
+
+        const node = this.top;
+        this.top = this.top.prev;
+
+        return node.value;
+    }
+
+    hasElement(value){
+        let node = this.top;
+
+        while(node !== null){
+            if (node.value === value) return true;
+            node = node.prev;
+        }
+
+        return false;
+    }
+}
+
+class NodeBinaryTree {
+    constructor(value){
+        this.value = value;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class BinaryTree {
+    constructor(){
+        this.root = null;
+    }
+
+    insert(value){
+        const node = new NodeBinaryTree(value);
+
+        if (this.root === null) {
+            this.root = node;
+            return node;
+        } 
+        
+        return this.insertNode(this.root, node);
+
+    }
+
+    insertNode(node, newNode){
+        if (newNode.value < node.value) {
+            if (node.left === null) {
+                node.left = newNode;
+
+                return newNode;
+            }
+
+            this.insertNode(node.left, newNode);
+        } else {
+            if (node.right === null) {
+                node.right = newNode;
+
+                return newNode;
+            }
+
+            this.insertNode(node.right, newNode);
+        }
+    }
+}
+
