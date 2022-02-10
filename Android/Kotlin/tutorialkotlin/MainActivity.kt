@@ -23,6 +23,10 @@ class MainActivity : AppCompatActivity() {
         classes()
 
         enumClasses()
+
+        dataClasses()
+
+        lambda()
     }
     /*
        Es un tipo de lenguaje estatico.
@@ -242,5 +246,119 @@ class MainActivity : AppCompatActivity() {
 
         println(userDirection.dir) // Devuelve 1
     }
-}
+
+    private fun dataClasses() {
+        val dataprogrammer: DataProgrammer = DataProgrammer(100000, "Nicolas", "29", arrayOf(Programmer.Languaje.Java, Programmer.Languaje.Kotlin))
+    }
+
+    private fun destructuring() {
+        /*
+            Como en javacript podemos destructurar objetos y mapas, solamente que aca usamos parentesis ()
+         */
+
+        val (name, age, languajes) = Programmer(100000, "Nicolas", "29", arrayOf(Programmer.Languaje.Java, Programmer.Languaje.Kotlin))
+
+        val mapo = mapOf("name" to "Nicolas", "age" to "29", "languajes" to arrayOf(Programmer.Languaje.Java, Programmer.Languaje.Kotlin))
+
+        for ((key, value) in mapo) {
+            println("$key - $value")
+        }
+    }
+
+    private fun extension() {
+        /*
+            Podemos agregar funciones a una clase ya existente, esto se hace con la palabra reservada
+            "extension"
+
+            Esto se hace con la palabra reservada "fun" y se puede agregar a una clase ya existente
+            o a una clase que se esta creando
+
+            Esto nos permite tambien extender librerias de tercero sin modificar su source code
+
+            Basicamente se agrega una funcion a una clase ya existente
+
+            Para hacer esto tenemos que crear una fun
+
+            fun Class.functionName() {
+                // Codigo
+            }
+
+            Y para usarla solamente tenemos que crear una nueva instancia de la clase
+            y llamar a la funcion
+
+            Tambien podemos crear custom variables de esa clase
+
+            val Class.variableName: Type = value
+                get() = field
+
+            val Date.formatSize : Int
+                get() = customFormat().length
+
+            generalmente se tiene un fichero por cada clase que se va a extender
+
+            Tambien se puede aplicar extensions a elementos visuales
+        */
+
+        val myDate = Date()
+
+        println(myDate.customFormat())
+
+        println(myData.formatSize)
+
+        val myDate: Date? = null
+
+        println(myDate.customFormat())
+
+        println(myData.formatSize)
+    }
+
+    fun lambda() {
+        /*
+            Lambda es una funcion anonima que se puede crear en una linea
+
+            Las lambda no tienen "return" devuelven la ultima linea de codigo
+
+            Podemos devolver cosas haciendo reutrn@lambda value
+        */
+        val myIntList: arrayListOf<int> = arrayListOf(1,2,3,4,5,6,7,8,9,10)
+
+        val myIntListFilter = myIntList.filter { myInt ->
+
+            if (myInt == 1) {
+                return@filter false
+            }
+
+            myInt > 5
+        }
+
+        val mySum = fun(x: Int, y: Int): Int = x + y
+
+        println(myOperateFun(1, 2, mySum))
+
+        println(myOperateFun(5, 10) { x, y -> x + y })
+
+        myAsyncFun("MoureDev") {
+            println("Hello $it")
+        }
+
+        hola: String = "Hola"
+    }
+
+    private fun myOperateFun(x: Int, y:Int, myFun: (Int, Int) -> Int): Int {
+        return myFun(x, y)
+    }
+
+    /*
+        Asyncrona - Para definir una funcion asincrona tenemos que usar la palabra reservada
+        thread adentro de una funcion, esto crea un nuevo thread, y adentro ponemos la logica que 
+        queremos que se ejecute de manera asyncrona. Podemos tener mas de un hilo por cada funcion
+    */
+    private fun myAsyncFun(name: String, hello: (String) -> Unit) {
+        val myNewString = "Hello $name"
+
+        thread {
+            Thread.sleep(5000)
+            hello(myNewString)
+        }
+    }
 }
