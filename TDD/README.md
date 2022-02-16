@@ -318,3 +318,29 @@ In php unit, we have the functions:
     So it'll have the same methods and the same properties that te real class
 
     and then build a mock class of that fixture
+
+# LAWS OF TDD:
+
+-   First Law:
+    -   You may not write production code until you have a written a failing test for it.
+-   Second Law:
+    -   You may not write more of a unit test than is sufficient to fail, and not compilling is failing
+-   Third Law:
+    -   You may not write more production code than is sufficient to pass the currently failing test.
+
+# ClEAN TEST RULES:
+
+[Test one concept per test]
+
+F.I.R.S.T =
+
+-   Fast:
+    -   Test should be fast.
+-   Independent:
+    -   Tests should not depend on each other.
+-   Repeatable:
+    -   Tests should be repeatable in any environment.
+-   Self-validating:
+    -   Tests should have a boolean output.
+-   Timely:
+    -   Tests need to be written in a timely fashion.

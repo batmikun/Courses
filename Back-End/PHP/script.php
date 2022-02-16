@@ -1,11 +1,20 @@
 <?php
-function Limiter(int $n): int
+function solution($str)
 {
-    if ($n == 6) {
-        return 3;
-    } else {
-        return 3 * Limiter($n + 1);
+
+    $list = array();
+
+    $isOdd = strlen($str) % 2;
+
+    for ($i = 0; $i < strlen($str); $i = $i + 2) {
+        if ($isOdd != 0 && $i == strlen($str) - 1) {
+            $list[] = $str[$i] . "_";
+        } else {
+            $list[] = $str[$i] . $str[$i + 1];
+        }
     }
+
+    return $list;
 }
 
-echo Limiter(3);
+var_dump(solution("abc"));
